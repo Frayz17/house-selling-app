@@ -5,8 +5,7 @@ import styled from 'styled-components'
 export default class House extends Component {
   constructor (props) {
     super(props)
-    const { images } = this.props
-
+    const { images } = this.props.house
     let currentImage
     images.length > 0 ? currentImage = 0 : currentImage = null
 
@@ -16,9 +15,25 @@ export default class House extends Component {
   }
 
   nextImage = () => {
-    const { currentImage } = this.props
+    const { currentImage } = this.state
+    const { images } = this.props.house
 
-    // if (this)
+    if (currentImage != null && currentImage < images.length) {
+      this.setState({
+        currentImage: currentImage + 1
+      })
+    }
+  }
+
+  prevImage = () => {
+    const { currentImage } = this.state
+
+    if (currentImage != null && currentImage > 0) {
+      this.setState({
+
+        currentImage: currentImage - 1
+      })
+    }
   }
 
   render () {
@@ -31,13 +46,19 @@ export default class House extends Component {
       rating,
       total_rooms: totalRooms } = this.props.house
 
+    const { currentImage } = this.state
+
+    // console.log(images.length)
+    // console.log(this.state.currentImage)
+    console.log(currentImage > images.length ? true : null)
+
     return (
-      <HouseBox>
+      <HouseBox>TextTrackCueList
 
         <WrapperLeft>
           <Carusel>
-            <div className='arrowLeft' />
-            <div className='arrowRight' />
+            <button disabled={currentImage == 0 ? true : null} onClick={this.prevImage} className='arrowLeft'>prev</button>
+            <button disabled={currentImage > images.length ? true : null} onClick={this.nextImage} className='arrowRight'>next</button>
             <img src={images[0]} width='50px' alt='houses' />
           </Carusel>
           <div>
