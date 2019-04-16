@@ -1,45 +1,69 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-export default function House ({ house }) {
-  const {
-    description,
-    full_address: fullAddress,
-    images,
-    price,
-    public_date: publicDate,
-    rating,
-    total_rooms: totalRooms } = house
+export default class House extends Component {
+  constructor (props) {
+    super(props)
+    const { images } = this.props
 
-  return (
-    <HouseBox>
+    let currentImage
+    images.length > 0 ? currentImage = 0 : currentImage = null
 
-      <WrapperLeft>
-        <img src={images[0]} width='50px' alt='houses' />
-        <div>
-          rating: <span>{rating}</span>
-        </div>
-      </WrapperLeft>
+    this.state = {
+      currentImage
+    }
+  }
 
-      <WrapperRight>
-        <div>
-          address: <span>{fullAddress}</span>
-        </div>
-        <div>
-          description: <span>{description}</span>
-        </div>
-        <div>
-          <span>rooms: <span>{totalRooms}</span></span>
-          <span>date: <span>{publicDate}</span></span>
-        </div>
-        <div>
-          <button>купить за {price}</button>
-        </div>
-      </WrapperRight>
+  nextImage = () => {
+    const { currentImage } = this.props
 
-    </HouseBox>
-  )
+    // if (this)
+  }
+
+  render () {
+    const {
+      description,
+      full_address: fullAddress,
+      images,
+      price,
+      public_date: publicDate,
+      rating,
+      total_rooms: totalRooms } = this.props.house
+
+    return (
+      <HouseBox>
+
+        <WrapperLeft>
+          <Carusel>
+            <div className='arrowLeft' />
+            <div className='arrowRight' />
+            <img src={images[0]} width='50px' alt='houses' />
+          </Carusel>
+          <div>
+            rating: <span>{rating}</span>
+          </div>
+        </WrapperLeft>
+
+        <WrapperRight>
+          <div>
+            Адрес: <span>{fullAddress}</span>
+          </div>
+          <div>
+            Описание: <span>{description}</span>
+          </div>
+          <AdditionalInfo>
+            <span>комнаты: <span>{totalRooms}</span></span>
+            <span>дата: <span>{publicDate}</span></span>
+          </AdditionalInfo>
+          {/* <div> */}
+          <BtnPrice>купить за {price}</BtnPrice>
+          {/* </div> */}
+        </WrapperRight>
+
+      </HouseBox>
+    )
+  }
 }
 
 House.propTypes = {
@@ -55,10 +79,28 @@ const HouseBox = styled.div`
 `
 
 const WrapperLeft = styled.div`
-  width: 50%
+  width: 20%;
 `
 const WrapperRight = styled.div`
-  width: 50%
+  width: 80%;
+  margin-left: 5px;
+`
+const AdditionalInfo = styled.div`
+  margin-top: 5px;
+  text-align: center;
+  border: 1px solid #ccc;
+`
+
+const BtnPrice = styled.button`
+  display: block;
+  margin-left: auto;
+  margin-top: 5px;
+`
+
+const Carusel = styled.div`
+  >div {
+
+  }
 `
 
 /*
