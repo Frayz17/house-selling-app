@@ -5,33 +5,30 @@ import styled from 'styled-components'
 export default class House extends Component {
   constructor (props) {
     super(props)
-    const { images } = this.props.house
-    let currentImage
-    images.length > 0 ? currentImage = 0 : currentImage = null
 
     this.state = {
-      currentImage
+      imageIndex: 0
     }
   }
 
-  nextImage = () => {
-    const { currentImage } = this.state
+  handlerNextImage = () => {
+    const { imageIndex } = this.state
     const { images } = this.props.house
 
-    if (currentImage != null && currentImage < images.length) {
+    if (imageIndex != null && imageIndex < images.length - 1) {
       this.setState({
-        currentImage: currentImage + 1
+        imageIndex: imageIndex + 1
       })
     }
   }
 
-  prevImage = () => {
-    const { currentImage } = this.state
+  handlerPrevImage = () => {
+    const { imageIndex } = this.state
 
-    if (currentImage != null && currentImage > 0) {
+    if (imageIndex != null && imageIndex > 0) {
       this.setState({
 
-        currentImage: currentImage - 1
+        imageIndex: imageIndex - 1
       })
     }
   }
@@ -46,20 +43,26 @@ export default class House extends Component {
       rating,
       total_rooms: totalRooms } = this.props.house
 
-    const { currentImage } = this.state
-
-    // console.log(images.length)
-    // console.log(this.state.currentImage)
-    console.log(currentImage > images.length ? true : null)
+    const { imageIndex } = this.state
 
     return (
-      <HouseBox>TextTrackCueList
+      <HouseBox>
 
         <WrapperLeft>
           <Carusel>
-            <button disabled={currentImage == 0 ? true : null} onClick={this.prevImage} className='arrowLeft'>prev</button>
-            <button disabled={currentImage > images.length ? true : null} onClick={this.nextImage} className='arrowRight'>next</button>
-            <img src={images[0]} width='50px' alt='houses' />
+            <HouseImage src={images[imageIndex]} alt='houses' />
+            <button
+              disabled={imageIndex <= 0 ? true : null}
+              onClick={this.handlerPrevImage}
+              className='arrowLeft'>
+              prev
+            </button>
+            <button
+              disabled={imageIndex >= images.length - 1 ? true : null}
+              onClick={this.handlerNextImage}
+              className='arrowRight'>
+            next
+            </button>
           </Carusel>
           <div>
             rating: <span>{rating}</span>
@@ -94,17 +97,19 @@ House.propTypes = {
 const HouseBox = styled.div`
   display: flex;
   justify-content: space-between;
+  max-width: 600px;
+
   border: 1px solid black;
   margin: 10px;
   padding: 5px;
 `
 
 const WrapperLeft = styled.div`
-  width: 20%;
+  width: 30%;
 `
 const WrapperRight = styled.div`
-  width: 80%;
-  margin-left: 5px;
+  width: 70%;
+  margin-left: 10px;
 `
 const AdditionalInfo = styled.div`
   margin-top: 5px;
@@ -122,6 +127,10 @@ const Carusel = styled.div`
   >div {
 
   }
+`
+
+const HouseImage = styled.img`
+  width: 100%;
 `
 
 /*
