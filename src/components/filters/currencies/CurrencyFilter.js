@@ -1,8 +1,8 @@
 import React from 'react'
 import Currency from './Currency'
 
-export default function CurrencyFilter ({ currencies }) {
-  const { currencyList, currencySelected } = currencies
+export default function CurrencyFilter ({ currencies, handlerCurrencySelection }) {
+  const { currencyList } = currencies
 
   return (
     <div>
@@ -11,7 +11,7 @@ export default function CurrencyFilter ({ currencies }) {
         <Currency
           key={currencyList.indexOf(currency)}
           currency={currency}
-          currencySelected={currencySelected}
+          handlerCurrencySelection={handlerCurrencySelection}
         />
       ))}
     </div>

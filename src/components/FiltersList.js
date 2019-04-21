@@ -33,13 +33,24 @@ export default class HousesFilter extends Component {
     }
   }
 
+  handlerCurrencySelection = (currency) => () => {
+    this.setState({
+      currencies: {
+        ...this.state.currencies,
+        currencySelected: currency
+      }
+    })
+  }
+
   render () {
     const { currencies } = this.state
+    const { handlerCurrencySelection } = this
 
     return (
       <Container>
         <CurrencyFilter
           currencies={currencies}
+          handlerCurrencySelection={handlerCurrencySelection}
         />
         <RoomsFilter />
         <PriceFilter />

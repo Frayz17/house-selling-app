@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function Currency ({ currency }) {
+export default function Currency ({ currency, handlerCurrencySelection }) {
   return (
-    <CurrencySelection>{currency}</CurrencySelection>
+    <CurrencySelection onClick={handlerCurrencySelection(currency)}>{currency}</CurrencySelection>
   )
 }
 
