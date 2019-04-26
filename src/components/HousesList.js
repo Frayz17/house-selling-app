@@ -1,39 +1,28 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import House from './house/House'
 
-export default class HousesList extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      houses: []
+export default function HousesList () {
+  const [houses, setHouses] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios('http://demo4452328.mockable.io/property')
+
+      setHouses(result.data.data)
     }
-  }
 
-  async componentDidMount () {
-    try {
-      let response = await fetch('http://demo4452328.mockable.io/property')
-      let houses = await response.json()
+    fetchData()
+  }, [])
 
-      this.setState({
-        houses: houses.data
-      })
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  render () {
-    const { houses } = this.state
-
-    return (
-      <div>
-        {houses.map(house => (
-          <House
-            key={house.id}
-            house={house}
-          />
-        ))}
-      </div>
-    )
-  }
+  return (
+    <div>
+      {houses.map(house => (
+        <House
+          key={house.id}
+          house={house}
+        />
+      ))}
+    </div>
+  )
 }

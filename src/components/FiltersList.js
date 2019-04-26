@@ -1,63 +1,56 @@
-import React, { Component } from 'react'
-import CurrencyFilter from './filters/currencies/CurrencyFilter'
+import React, { useState } from 'react'
+import CurrencyList from './filters/currencies/CurrencyList'
 import RoomsFilter from './filters/RoomsFilter'
 import PriceFilter from './filters/PriceFilter'
 import RatingFilter from './filters/RatingFilter'
 import styled from 'styled-components'
 
-export default class HousesFilter extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      currencies: {
-        currencyList: [
-          'uah',
-          'usd',
-          'eur'
-        ],
-        currencySelected: 'uah'
-      },
-      rooms: {
-        all: true,
-        room1: false,
-        room2: false,
-        room3: false
-      },
-      price: {
-        start: 0,
-        end: 100000
-      },
-      rating: {
-        stars: null
-      }
-    }
-  }
+export default function HousesFilter () {
+  const [currencies, setCurrencies] = useState({
+    currencyList: [
+      'uah',
+      'usd',
+      'eur'
+    ],
+    currencySelected: 'uah'
+  })
 
-  handlerCurrencySelection = (currency) => () => {
-    this.setState({
-      currencies: {
-        ...this.state.currencies,
+  const [rooms, setRooms] = useState({
+    all: true,
+    room1: false,
+    room2: false,
+    room3: false
+  })
+
+  const [price, setPrice] = useState({
+    start: 0,
+    end: 100000
+  })
+
+  const [rating, setRating] = useState({
+    stars: null
+  })
+
+  const handlerCurrencySelection = (currency) => () => {
+    setCurrencies(prevState => {
+      const updatedValues = {
         currencySelected: currency
       }
+      return { ...prevState, ...updatedValues }
     })
   }
 
-  render () {
-    const { currencies } = this.state
-    const { handlerCurrencySelection } = this
-
-    return (
-      <Container>
-        <CurrencyFilter
-          currencies={currencies}
-          handlerCurrencySelection={handlerCurrencySelection}
-        />
-        <RoomsFilter />
-        <PriceFilter />
-        <RatingFilter />
-      </Container>
-    )
-  }
+  return (
+    <Container>
+      <CurrencyList
+        currencies={currencies}
+        handlerCurrencySelection={handlerCurrencySelection}
+      />
+      <RoomsFilter />
+      <PriceFilter />
+      <RatingFilter />
+    </Container>
+  )
 }
 
 const Container = styled.div`

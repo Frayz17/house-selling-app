@@ -1,24 +1,22 @@
-import React, { Component } from 'react'
+import React from 'react'
 import HousesList from './components/HousesList'
 import FiltersList from './components/FiltersList'
 import styled from 'styled-components'
 
-export default class App extends Component {
-  render () {
-    return (
-      <Container>
+export default function App () {
+  return (
+    <Container>
 
-        <FiltersListWrapper>
-          <FiltersList />
-        </FiltersListWrapper>
+      <FiltersListWrapper>
+        <FiltersList />
+      </FiltersListWrapper>
 
-        <HousesListWrapper>
-          <HousesList />
-        </HousesListWrapper>
+      <HousesListWrapper>
+        <HousesList />
+      </HousesListWrapper>
 
-      </Container>
-    )
-  }
+    </Container>
+  )
 }
 
 const Container = styled.div`
