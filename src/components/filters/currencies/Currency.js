@@ -1,12 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function Currency ({ currency, handlerCurrencySelection }) {
+export default function Currency ({ currencyName, currencySelected, handlerCurrencySelection }) {
   return (
-    <CurrencySelection onClick={handlerCurrencySelection(currency)}>{currency}</CurrencySelection>
+    <CurrencyBtn
+      selected={currencySelected === currencyName ? true : null}
+      onClick={handlerCurrencySelection(currencyName)}>
+      {currencyName}
+    </CurrencyBtn>
   )
 }
 
-const CurrencySelection = styled.button`
+const CurrencyBtn = styled.button`
   display: inline-box;
+  background: ${props => props.selected ? 'green' : null}
 `

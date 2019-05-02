@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import Rate from 'rc-rate'
 import CurrencyList from './filters/currencies/CurrencyList'
-import RoomsFilter from './filters/RoomsFilter'
+import RoomsList from './filters/rooms/RoomsList'
 import PriceFilter from './filters/PriceFilter'
-import RatingFilter from './filters/RatingFilter'
+import RatingFilter from './filters/rating/RatingFilter'
+
 import styled from 'styled-components'
 
 export default function HousesFilter () {
@@ -15,12 +17,12 @@ export default function HousesFilter () {
     currencySelected: 'uah'
   })
 
-  const [rooms, setRooms] = useState({
-    all: true,
-    room1: false,
-    room2: false,
-    room3: false
-  })
+  const [rooms, setRooms] = useState([
+    { id: '1', numberOfRooms: 'all', selected: true },
+    { id: '2', numberOfRooms: 1, selected: false },
+    { id: '3', numberOfRooms: 2, selected: false },
+    { id: '4', numberOfRooms: 3, selected: false }
+  ])
 
   const [price, setPrice] = useState({
     start: 0,
@@ -28,7 +30,7 @@ export default function HousesFilter () {
   })
 
   const [rating, setRating] = useState({
-    stars: null
+    stars: 4
   })
 
   const handlerCurrencySelection = (currency) => () => {
@@ -40,15 +42,47 @@ export default function HousesFilter () {
     })
   }
 
+  const handlerRoomsSelection = (id) => () => {
+    setRooms(prevState => {
+      const updatedRoom = prevState.map(room => {
+        if (room.id === id) {
+          room.selected = !room.selected
+        }
+        return room
+      })
+
+      return updatedRoom
+    })
+  }
+
+  const handlerRatingSelection = (stars) => () => {
+    console.log('stars: ', stars)
+  }
+
   return (
     <Container>
       <CurrencyList
         currencies={currencies}
         handlerCurrencySelection={handlerCurrencySelection}
       />
-      <RoomsFilter />
+      <RoomsList
+        rooms={rooms}
+        handlerRoomsSelection={handlerRoomsSelection}
+      />
       <PriceFilter />
-      <RatingFilter />
+
+      <Rate
+        // defaultValue={5}
+        // onChange={onChange}
+        // style={{ fontSize: 20 }}
+        // allowHalf
+        // allowClear={false}
+      />
+
+      {/* <RatingFilter
+        rating={rating}
+        handlerRatingSelection={handlerRatingSelection}
+      /> */}
     </Container>
   )
 }
