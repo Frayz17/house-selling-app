@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import Rate from 'rc-rate'
 import CurrencyList from './filters/currencies/CurrencyList'
 import RoomsList from './filters/rooms/RoomsList'
 import PriceFilter from './filters/PriceFilter'
-import RatingFilter from './filters/rating/RatingFilter'
+import Rating from './filters/rating/Rating'
 
 import styled from 'styled-components'
 
@@ -30,7 +29,9 @@ export default function HousesFilter () {
   })
 
   const [rating, setRating] = useState({
-    stars: 4
+    value: 4,
+    min: 1,
+    max: 5
   })
 
   const handlerCurrencySelection = (currency) => () => {
@@ -55,8 +56,13 @@ export default function HousesFilter () {
     })
   }
 
-  const handlerRatingSelection = (stars) => () => {
-    console.log('stars: ', stars)
+  const handlerRatingChange = (value) => () => {
+    setRating(prevState => {
+      return {
+        ...prevState,
+        value
+      }
+    })
   }
 
   return (
@@ -69,20 +75,16 @@ export default function HousesFilter () {
         rooms={rooms}
         handlerRoomsSelection={handlerRoomsSelection}
       />
-      <PriceFilter />
 
-      <Rate
-        // defaultValue={5}
-        // onChange={onChange}
-        // style={{ fontSize: 20 }}
-        // allowHalf
-        // allowClear={false}
+      <Rating
+        min={rating.min}
+        max={rating.max}
+        value={rating.value}
+        onChange={handlerRatingChange}
       />
 
-      {/* <RatingFilter
-        rating={rating}
-        handlerRatingSelection={handlerRatingSelection}
-      /> */}
+      <PriceFilter />
+
     </Container>
   )
 }
