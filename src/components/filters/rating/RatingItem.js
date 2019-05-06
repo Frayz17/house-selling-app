@@ -4,7 +4,10 @@ import styled from 'styled-components'
 
 export default function RatingItem ({ value, checked, colored, onChange }) {
   return (
-    <ItemBox className={`rating__item ${colored ? 'rating__item--selected' : ''}`}>
+    <ItemBox
+      colored={colored}
+      className={`rating__item ${colored ? 'rating__item--selected' : ''}`}
+    >
       <Item
         checked={checked}
         className='rating__input'
@@ -30,13 +33,8 @@ const ItemBox = styled.label`
   ::before {
     content: "★";
     font-size: 22px;
-    color: lightgray;
-
-    :hover {
-      color: orange;
-    }
+    color: ${props => props.colored ? 'orange' : 'lightgray'};
   }
-
 `
 
 const Item = styled.input`

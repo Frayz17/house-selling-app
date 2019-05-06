@@ -33,4 +33,6 @@ Rating.prototypes = {
 const RatingBox = styled.div`
   line-height: 1;
   display: inline-block;
+
+  
 `
