@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import CurrencyList from './filters/currencies/CurrencyList'
 import RoomsList from './filters/rooms/RoomsList'
-import PriceFilter from './filters/PriceFilter'
+import Price from './filters/price/Price'
 import Rating from './filters/rating/Rating'
 
 import styled from 'styled-components'
@@ -83,7 +83,10 @@ export default function HousesFilter () {
         onChange={handlerRatingChange}
       />
 
-      <PriceFilter />
+      <Price
+        start={price.start}
+        end={price.end}
+      />
 
     </Container>
   )

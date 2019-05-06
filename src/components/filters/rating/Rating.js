@@ -12,6 +12,7 @@ export default function Rating ({ min, max, onChange, value }) {
       {
         range(min, max).map(item => (
           <RatingItem
+            key={item}
             colored={value >= item}
             checked={value === item}
             value={item}
@@ -34,5 +35,7 @@ const RatingBox = styled.div`
   line-height: 1;
   display: inline-block;
 
-  
+  &:hover .rating__item::before {
+    color: orange;
+  }
 `

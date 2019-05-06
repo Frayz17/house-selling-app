@@ -35,6 +35,10 @@ const ItemBox = styled.label`
     font-size: 22px;
     color: ${props => props.colored ? 'orange' : 'lightgray'};
   }
+
+  &:hover ~ ::before {
+    color: lightgray !important;
+  }
 `
 
 const Item = styled.input`
