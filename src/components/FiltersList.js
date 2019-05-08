@@ -56,13 +56,45 @@ export default function HousesFilter () {
     })
   }
 
-  const handlerRatingChange = (value) => () => {
+  const handlerRatingChange = value => () => {
     setRating(prevState => {
       return {
         ...prevState,
         value
       }
     })
+  }
+
+  const handlerSetPrice = event => {
+    let value = event.target.value
+
+    // setPrice(prevState => {
+    //   return {
+    //     ...prevState,
+    //     start: value
+    //   }
+    // })
+
+    setPriceStart()
+    setPriceEnd()
+    console.log('value: ', value)
+
+    function setPriceStart () {
+      return setPrice(prevState => {
+        return {
+          ...prevState,
+          start: value
+        }
+      })
+    }
+    function setPriceEnd () {
+      return setPrice(prevState => {
+        return {
+          ...prevState,
+          end: value
+        }
+      })
+    }
   }
 
   return (
@@ -86,6 +118,7 @@ export default function HousesFilter () {
       <Price
         start={price.start}
         end={price.end}
+        handlerSetPrice={handlerSetPrice}
       />
 
     </Container>
