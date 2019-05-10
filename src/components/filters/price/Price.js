@@ -5,18 +5,22 @@ import styled from 'styled-components'
 export default function Price ({ start, end, handlerSetPriceStart, handlerSetPriceEnd }) {
   return (
     <div>
-      <label>
+      <LabelBox>
         от
         <input type='number' onChange={handlerSetPriceStart} value={start} />
-      </label>
+      </LabelBox>
 
-      <label>
+      <LabelBox>
         до
         <input type='number' onChange={handlerSetPriceEnd} value={end} />
-      </label>
+      </LabelBox>
     </div>
   )
 }
+
+const LabelBox = styled.label`
+  display: inline-block;
+`
 
 Price.prototypes = {
   start: PropTypes.number.isRequired,

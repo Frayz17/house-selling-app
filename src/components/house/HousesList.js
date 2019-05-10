@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react'
+
 import axios from 'axios'
 import House from './House'
 
-export default function HousesList () {
+import PropTypes from 'prop-types'
+
+export default function HousesList ({
+  currencies,
+  rooms,
+  price,
+  rating
+}) {
   const [houses, setHouses] = useState([])
 
   useEffect(() => {
@@ -25,4 +33,11 @@ export default function HousesList () {
       ))}
     </div>
   )
+}
+
+HousesList.prototypes = {
+  currencies: PropTypes.object.isRequired,
+  rooms: PropTypes.array.isRequired,
+  price: PropTypes.object.isRequired,
+  rating: PropTypes.object.isRequired
 }

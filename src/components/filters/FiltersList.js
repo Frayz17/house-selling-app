@@ -1,94 +1,24 @@
-import React, { useState } from 'react'
+import React from 'react'
+
 import CurrencyList from './currencies/CurrencyList'
 import RoomsList from './rooms/RoomsList'
 import Price from './price/Price'
 import Rating from './rating/Rating'
 
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-export default function HousesFilter () {
-  const [currencies, setCurrencies] = useState({
-    currencyList: [
-      'uah',
-      'usd',
-      'eur'
-    ],
-    currencySelected: 'uah'
-  })
-
-  const [rooms, setRooms] = useState([
-    { id: '1', numberOfRooms: 'all', selected: true },
-    { id: '2', numberOfRooms: 1, selected: false },
-    { id: '3', numberOfRooms: 2, selected: false },
-    { id: '4', numberOfRooms: 3, selected: false }
-  ])
-
-  const [price, setPrice] = useState({
-    start: 0,
-    end: 100000
-  })
-
-  const [rating, setRating] = useState({
-    value: 4,
-    min: 1,
-    max: 5
-  })
-
-  const handlerCurrencySelection = (currency) => () => {
-    setCurrencies(prevState => {
-      const updatedValues = {
-        currencySelected: currency
-      }
-      return { ...prevState, ...updatedValues }
-    })
-  }
-
-  const handlerRoomsSelection = (id) => () => {
-    setRooms(prevState => {
-      const updatedRoom = prevState.map(room => {
-        if (room.id === id) {
-          room.selected = !room.selected
-        }
-        return room
-      })
-
-      return updatedRoom
-    })
-  }
-
-  const handlerRatingChange = value => () => {
-    setRating(prevState => {
-      return {
-        ...prevState,
-        value
-      }
-    })
-  }
-
-  const handlerSetPriceStart = event => {
-    let value = event.target.value
-    if (value >= 0) {
-      setPrice(prevState => {
-        return {
-          ...prevState,
-          start: value
-        }
-      })
-    }
-  }
-
-  const handlerSetPriceEnd = event => {
-    let value = event.target.value
-    if (value <= 100000) {
-      setPrice(prevState => {
-        return {
-          ...prevState,
-          end: value
-        }
-      })
-    }
-  }
-
+export default function FiltersList ({
+  currencies,
+  rooms,
+  price,
+  rating,
+  handlerCurrencySelection,
+  handlerRoomsSelection,
+  handlerSetPriceEnd,
+  handlerSetPriceStart,
+  handlerRatingChange
+}) {
   return (
     <Container>
       <CurrencyList
@@ -116,6 +46,19 @@ export default function HousesFilter () {
 
     </Container>
   )
+}
+
+FiltersList.prototypes = {
+  currencies: PropTypes.object.isRequired,
+  rooms: PropTypes.array.isRequired,
+  price: PropTypes.object.isRequired,
+  rating: PropTypes.object.isRequired,
+
+  handlerCurrencySelection: PropTypes.func.isRequired,
+  handlerRoomsSelection: PropTypes.func.isRequired,
+  handlerSetPriceEnd: PropTypes.func.isRequired,
+  handlerSetPriceStart: PropTypes.func.isRequired,
+  handlerRatingChange: PropTypes.func.isRequired
 }
 
 const Container = styled.div`
