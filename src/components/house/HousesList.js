@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import House from './house/House'
+import House from './House'
 
 export default function HousesList () {
   const [houses, setHouses] = useState([])

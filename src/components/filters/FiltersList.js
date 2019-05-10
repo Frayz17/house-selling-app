@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import CurrencyList from './filters/currencies/CurrencyList'
-import RoomsList from './filters/rooms/RoomsList'
-import Price from './filters/price/Price'
-import Rating from './filters/rating/Rating'
+import CurrencyList from './currencies/CurrencyList'
+import RoomsList from './rooms/RoomsList'
+import Price from './price/Price'
+import Rating from './rating/Rating'
 
 import styled from 'styled-components'
 

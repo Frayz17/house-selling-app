@@ -1,6 +1,6 @@
 import React from 'react'
-import HousesList from './components/HousesList'
-import FiltersList from './components/FiltersList'
+import HousesList from './components/house/HousesList'
+import FiltersList from './components/filters/FiltersList'
 import styled from 'styled-components'
 
 export default function App () {
