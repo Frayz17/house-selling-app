@@ -2,17 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-export default function Price ({ start, end, handlerSetPrice }) {
+export default function Price ({ start, end, handlerSetPriceStart, handlerSetPriceEnd }) {
   return (
     <div>
       <label>
         от
-        <input type='number' onChange={handlerSetPrice} value={start} />
+        <input type='number' onChange={handlerSetPriceStart} value={start} />
       </label>
 
       <label>
         до
-        <input type='number' onChange={handlerSetPrice} value={end} />
+        <input type='number' onChange={handlerSetPriceEnd} value={end} />
       </label>
     </div>
   )

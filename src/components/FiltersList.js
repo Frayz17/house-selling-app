@@ -65,30 +65,22 @@ export default function HousesFilter () {
     })
   }
 
-  const handlerSetPrice = event => {
+  const handlerSetPriceStart = event => {
     let value = event.target.value
-
-    // setPrice(prevState => {
-    //   return {
-    //     ...prevState,
-    //     start: value
-    //   }
-    // })
-
-    setPriceStart()
-    setPriceEnd()
-    console.log('value: ', value)
-
-    function setPriceStart () {
-      return setPrice(prevState => {
+    if (value >= 0) {
+      setPrice(prevState => {
         return {
           ...prevState,
           start: value
         }
       })
     }
-    function setPriceEnd () {
-      return setPrice(prevState => {
+  }
+
+  const handlerSetPriceEnd = event => {
+    let value = event.target.value
+    if (value <= 100000) {
+      setPrice(prevState => {
         return {
           ...prevState,
           end: value
@@ -108,17 +100,18 @@ export default function HousesFilter () {
         handlerRoomsSelection={handlerRoomsSelection}
       />
 
+      <Price
+        start={price.start}
+        end={price.end}
+        handlerSetPriceStart={handlerSetPriceStart}
+        handlerSetPriceEnd={handlerSetPriceEnd}
+      />
+
       <Rating
         min={rating.min}
         max={rating.max}
         value={rating.value}
         onChange={handlerRatingChange}
-      />
-
-      <Price
-        start={price.start}
-        end={price.end}
-        handlerSetPrice={handlerSetPrice}
       />
 
     </Container>
