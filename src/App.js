@@ -24,7 +24,9 @@ export default function App () {
 
   const [price, setPrice] = useState({
     start: 0,
-    end: 100000
+    end: 10000000,
+    startDemand: 0,
+    endDemand: 10000000
   })
 
   const [rating, setRating] = useState({
@@ -66,7 +68,7 @@ export default function App () {
 
   const handlerSetPriceStart = event => {
     let value = event.target.value
-    if (value >= 0) {
+    if (value >= price.startDemand && value <= price.end) {
       setPrice(prevState => {
         return {
           ...prevState,
@@ -78,7 +80,7 @@ export default function App () {
 
   const handlerSetPriceEnd = event => {
     let value = event.target.value
-    if (value <= 100000) {
+    if (value <= price.endDemand && value >= price.start) {
       setPrice(prevState => {
         return {
           ...prevState,

@@ -23,6 +23,19 @@ export default function HousesList ({
     fetchData()
   }, [])
 
+  const filter = (house, price, rating) => {
+    if (house.rating >= rating.value &&
+      house.price >= price.start &&
+      house.price <= price.end) {
+      return true
+    }
+    return false
+  }
+
+  let arr = []
+  arr = houses.filter(house => filter(house, price, rating))
+  console.log(arr)
+
   return (
     <div>
       {houses.map(house => (
