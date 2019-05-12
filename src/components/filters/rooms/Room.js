@@ -2,14 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export default function Room ({ room, handlerRoomsSelection }) {
-  const roomsLabelString = (numberOfRooms) => {
-    switch (numberOfRooms) {
+  const roomsLabelString = (amount) => {
+    switch (amount) {
       case 'all':
         return 'все'
       case 1:
-        return (numberOfRooms + ' комната')
+        return (amount + ' комната')
       default:
-        return (numberOfRooms + ' комнаты')
+        return (amount + ' комнаты')
     }
   }
 
@@ -18,11 +18,11 @@ export default function Room ({ room, handlerRoomsSelection }) {
       <label>
         <input type='checkbox'
           name='rooms'
-          value={room.numberOfRooms}
+          value={room.amount}
           onChange={handlerRoomsSelection(room.id)}
           checked={room.selected}
         />
-        {roomsLabelString(room.numberOfRooms)}
+        {roomsLabelString(room.amount)}
       </label>
     </div>
   )

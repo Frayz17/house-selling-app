@@ -35,6 +35,7 @@ export default function FiltersList ({
         end={price.end}
         handlerSetPriceStart={handlerSetPriceStart}
         handlerSetPriceEnd={handlerSetPriceEnd}
+        currency={currencies.selected}
       />
 
       <Rating

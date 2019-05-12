@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function Currency ({ currencyName, currencySelected, handlerCurrencySelection }) {
+export default function Currency ({ currencyName, selected, handlerCurrencySelection }) {
   return (
     <CurrencyBtn
-      selected={currencySelected === currencyName ? true : null}
+      selected={selected === currencyName ? true : null}
       onClick={handlerCurrencySelection(currencyName)}>
       {currencyName}
     </CurrencyBtn>

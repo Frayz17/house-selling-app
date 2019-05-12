@@ -7,26 +7,26 @@ import styled from 'styled-components'
 
 export default function App () {
   const [currencies, setCurrencies] = useState({
-    currencyList: [
+    list: [
       'uah',
       'usd',
       'eur'
     ],
-    currencySelected: 'uah'
+    selected: 'uah'
   })
 
   const [rooms, setRooms] = useState([
-    { id: '1', numberOfRooms: 'all', selected: true },
-    { id: '2', numberOfRooms: 1, selected: false },
-    { id: '3', numberOfRooms: 2, selected: false },
-    { id: '4', numberOfRooms: 3, selected: false }
+    { id: '1', amount: 'all', selected: true },
+    { id: '2', amount: 1, selected: false },
+    { id: '3', amount: 2, selected: false },
+    { id: '4', amount: 3, selected: false }
   ])
 
   const [price, setPrice] = useState({
     start: 0,
-    end: 10000000,
+    end: 1000000000,
     startDemand: 0,
-    endDemand: 10000000
+    endDemand: 1000000000
   })
 
   const [rating, setRating] = useState({
@@ -38,7 +38,7 @@ export default function App () {
   const handlerCurrencySelection = (currency) => () => {
     setCurrencies(prevState => {
       const updatedValues = {
-        currencySelected: currency
+        selected: currency
       }
       return { ...prevState, ...updatedValues }
     })

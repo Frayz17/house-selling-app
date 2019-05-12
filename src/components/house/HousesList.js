@@ -12,6 +12,7 @@ export default function HousesList ({
   rating
 }) {
   const [houses, setHouses] = useState([])
+  let filteredHouses = []
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,7 +24,7 @@ export default function HousesList ({
     fetchData()
   }, [])
 
-  const filter = (house, price, rating) => {
+  function filter (house, price, rating) {
     if (house.rating >= rating.value &&
       house.price >= price.start &&
       house.price <= price.end) {
@@ -32,13 +33,29 @@ export default function HousesList ({
     return false
   }
 
-  let arr = []
-  arr = houses.filter(house => filter(house, price, rating))
-  console.log(arr)
+  function handlerFilterRooms (rooms, houses) {
+    let filteredHouses = []
+    for (let i = 0; i < rooms.length; i++) {
+      if (rooms[i].amount === 'all' && rooms[i].selected) {
+        filteredHouses = [...houses]
+        break
+      } else {
+        if (rooms[i].selected) {
+          filteredHouses = filteredHouses.concat(
+            houses.filter(house => house.total_rooms === rooms[i].amount)
+          )
+        }
+      }
+    }
+    return filteredHouses
+  }
 
+  filteredHouses = houses.filter(house => filter(house, price, rating))
+  filteredHouses = handlerFilterRooms(rooms, filteredHouses)
+  console.log(filteredHouses)
   return (
     <div>
-      {houses.map(house => (
+      {filteredHouses.map(house => (
         <House
           key={house.id}
           house={house}
