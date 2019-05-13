@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import Currency from '../filters/currencies/Currency'
 
 export default class House extends Component {
   constructor (props) {
@@ -42,8 +43,22 @@ export default class House extends Component {
       public_date: publicDate,
       rating,
       total_rooms: totalRooms } = this.props.house
-
+    const { currency } = this.props
     const { imageIndex } = this.state
+
+    let priceUseCurrency
+    switch (currency) {
+      case 'usd':
+        priceUseCurrency = price / 26
+        break
+      case 'eur':
+        priceUseCurrency = price / 30
+        break
+      default:
+        priceUseCurrency = price
+        break
+    }
+    priceUseCurrency = Math.round(priceUseCurrency)
 
     return (
       <HouseBox>
@@ -81,7 +96,7 @@ export default class House extends Component {
             <span>дата: <span>{publicDate}</span></span>
           </AdditionalInfo>
           {/* <div> */}
-          <BtnPrice>купить за {price}</BtnPrice>
+          <BtnPrice>{priceUseCurrency} {currency.toUpperCase()}</BtnPrice>
           {/* </div> */}
         </WrapperRight>
 

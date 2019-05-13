@@ -23,14 +23,10 @@ export default function App () {
   ])
 
   const [price, setPrice] = useState({
-    start: 0,
+    start: 1,
     end: 1000000000,
-    startDemand: 0,
-    endDemand: 1000000000,
-
-    startDefault: 0,
-    endDefault: 1000000000,
-    endDemandDefault: 1000000000
+    startDemand: 1,
+    endDemand: 1000000000
   })
 
   const [rating, setRating] = useState({
@@ -46,37 +42,6 @@ export default function App () {
       }
       return { ...prevState, ...updatedValues }
     })
-
-    handlerCurrencyApplying()
-  }
-
-  const handlerCurrencyApplying = () => {
-    switch (currencies.selected) {
-      case 'usd':
-        console.log('case: usd')
-        setPriceByCurrency(26)
-        break
-      case 'eur':
-        console.log('case: eur')
-        setPriceByCurrency(30)
-        break
-      default:
-        console.log('case: default')
-        setPriceByCurrency(1)
-        break
-    }
-
-    console.log(price.end)
-
-    function setPriceByCurrency (number) {
-      setPrice(prevState => {
-        return {
-          ...prevState,
-          end: price.endDefault / number,
-          endDemand: price.endDemandDefault / number
-        }
-      })
-    }
   }
 
   const handlerRoomsSelection = (id) => () => {
@@ -102,8 +67,8 @@ export default function App () {
   }
 
   const handlerSetPriceStart = event => {
-    let value = event.target.value
-    if (value >= price.startDemand && value <= price.end) {
+    let value = parseInt(event.target.value)
+    if (value >= price.startDemand && value <= price.end && !isNaN(value)) {
       setPrice(prevState => {
         return {
           ...prevState,
@@ -114,8 +79,8 @@ export default function App () {
   }
 
   const handlerSetPriceEnd = event => {
-    let value = event.target.value
-    if (value <= price.endDemand && value >= price.start) {
+    let value = parseInt(event.target.value)
+    if (value <= price.endDemand && value >= price.start && !isNaN(value)) {
       setPrice(prevState => {
         return {
           ...prevState,
@@ -135,7 +100,6 @@ export default function App () {
           price={price}
           rating={rating}
           handlerCurrencySelection={handlerCurrencySelection}
-          handlerCurrencyApplying={handlerCurrencyApplying}
           handlerRoomsSelection={handlerRoomsSelection}
           handlerSetPriceEnd={handlerSetPriceEnd}
           handlerSetPriceStart={handlerSetPriceStart}

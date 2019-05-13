@@ -6,15 +6,13 @@ export default function Price ({ start, end, handlerSetPriceStart, handlerSetPri
   return (
     <div>
       <LabelBox>
-        от
-        <input type='number' onChange={handlerSetPriceStart} value={start} />
-        {currency}
+        <span>от </span>
+        <input type='text' onChange={handlerSetPriceStart} value={start} />
       </LabelBox>
 
       <LabelBox>
-        до
-        <input type='number' onChange={handlerSetPriceEnd} value={end} />
-        {currency}
+        <span>до </span>
+        <input type='text' onChange={handlerSetPriceEnd} value={end} />
       </LabelBox>
     </div>
   )

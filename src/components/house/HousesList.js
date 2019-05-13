@@ -25,7 +25,7 @@ export default function HousesList ({
   }, [])
 
   function filter (house, price, rating) {
-    if (house.rating >= rating.value &&
+    if (house.rating <= rating.value &&
       house.price >= price.start &&
       house.price <= price.end) {
       return true
@@ -58,6 +58,7 @@ export default function HousesList ({
         <House
           key={house.id}
           house={house}
+          currency={currencies.selected}
         />
       ))}
     </div>
