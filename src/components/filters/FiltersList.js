@@ -14,6 +14,7 @@ export default function FiltersList ({
   price,
   rating,
   handlerCurrencySelection,
+  handlerCurrencyApplying,
   handlerRoomsSelection,
   handlerSetPriceEnd,
   handlerSetPriceStart,
@@ -56,6 +57,7 @@ FiltersList.prototypes = {
   rating: PropTypes.object.isRequired,
 
   handlerCurrencySelection: PropTypes.func.isRequired,
+  handlerCurrencyApplying: PropTypes.func.isRequired,
   handlerRoomsSelection: PropTypes.func.isRequired,
   handlerSetPriceEnd: PropTypes.func.isRequired,
   handlerSetPriceStart: PropTypes.func.isRequired,

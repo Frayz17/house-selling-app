@@ -52,7 +52,6 @@ export default function HousesList ({
 
   filteredHouses = houses.filter(house => filter(house, price, rating))
   filteredHouses = handlerFilterRooms(rooms, filteredHouses)
-  console.log(filteredHouses)
   return (
     <div>
       {filteredHouses.map(house => (
