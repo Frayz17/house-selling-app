@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import Currency from '../filters/currencies/Currency'
 
 export default class House extends Component {
   constructor (props) {
@@ -46,20 +45,6 @@ export default class House extends Component {
     const { currency } = this.props
     const { imageIndex } = this.state
 
-    let priceUseCurrency
-    switch (currency) {
-      case 'usd':
-        priceUseCurrency = price / 26
-        break
-      case 'eur':
-        priceUseCurrency = price / 30
-        break
-      default:
-        priceUseCurrency = price
-        break
-    }
-    priceUseCurrency = Math.round(priceUseCurrency)
-
     return (
       <HouseBox>
 
@@ -96,7 +81,7 @@ export default class House extends Component {
             <span>дата: <span>{publicDate}</span></span>
           </AdditionalInfo>
           {/* <div> */}
-          <BtnPrice>{priceUseCurrency} {currency.toUpperCase()}</BtnPrice>
+          <BtnPrice>Купить {price} {currency.toUpperCase()}</BtnPrice>
           {/* </div> */}
         </WrapperRight>
 
@@ -147,22 +132,3 @@ const Carusel = styled.div`
 const HouseImage = styled.img`
   width: 100%;
 `
-
-/*
-description:
-"Дом не достроенный (без внутренних отделочных работ кирпич, газоблок) на 60 кв.м. крытый битумная черепица, утеплен 100мм, метало пластиковые окна."
-full_address:
-"Киев, Киевская область, Дарницкий"
-id:
-5401
-images:
-Array[2]
-price:
-203400
-public_date:
-"2018-07-07"
-rating:
-2
-total_rooms:
-2
-*/

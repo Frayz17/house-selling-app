@@ -6,7 +6,7 @@ import House from './House'
 import PropTypes from 'prop-types'
 
 export default function HousesList ({
-  currencies,
+  currency,
   rooms,
   price,
   rating
@@ -18,13 +18,29 @@ export default function HousesList ({
     const fetchData = async () => {
       const result = await axios('http://demo4452328.mockable.io/property')
 
-      setHouses(result.data.data)
+      let filterHousesByCurrency = result.data.data.map(house => handlerPriceAccordingCurrency(house, currency))
+
+      setHouses(filterHousesByCurrency)
     }
 
     fetchData()
-  }, [])
+  }, [currency])
 
-  function filter (house, price, rating) {
+  const handlerPriceAccordingCurrency = (house, currency) => {
+    switch (currency) {
+      case 'usd':
+        house.price = Math.round(house.price / 26)
+        break
+      case 'eur':
+        house.price = Math.round(house.price / 30)
+        break
+      default:
+        break
+    }
+    return house
+  }
+
+  function handlerFilter (house, price, rating) {
     if (house.rating <= rating.value &&
       house.price >= price.start &&
       house.price <= price.end) {
@@ -50,15 +66,16 @@ export default function HousesList ({
     return filteredHouses
   }
 
-  filteredHouses = houses.filter(house => filter(house, price, rating))
+  filteredHouses = houses.filter(house => handlerFilter(house, price, rating))
   filteredHouses = handlerFilterRooms(rooms, filteredHouses)
+
   return (
     <div>
       {filteredHouses.map(house => (
         <House
           key={house.id}
           house={house}
-          currency={currencies.selected}
+          currency={currency}
         />
       ))}
     </div>
@@ -66,7 +83,7 @@ export default function HousesList ({
 }
 
 HousesList.prototypes = {
-  currencies: PropTypes.object.isRequired,
+  currency: PropTypes.object.isRequired,
   rooms: PropTypes.array.isRequired,
   price: PropTypes.object.isRequired,
   rating: PropTypes.object.isRequired

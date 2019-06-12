@@ -109,7 +109,7 @@ export default function App () {
 
       <HousesListWrapper>
         <HousesList
-          currencies={currencies}
+          currency={currencies.selected}
           rooms={rooms}
           price={price}
           rating={rating}
