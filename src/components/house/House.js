@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+
+import { Link } from 'react-router-dom'
+
 import styled from 'styled-components'
 
 export default class House extends Component {
@@ -35,6 +38,7 @@ export default class House extends Component {
 
   render () {
     const {
+      id,
       description,
       full_address: fullAddress,
       images,
@@ -81,7 +85,7 @@ export default class House extends Component {
             <span>дата: <span>{publicDate}</span></span>
           </AdditionalInfo>
           {/* <div> */}
-          <BtnPrice>Купить {price} {currency.toUpperCase()}</BtnPrice>
+          <BtnPrice to={`/checkout/${id}`}>Купить {price} {currency.toUpperCase()}</BtnPrice>
           {/* </div> */}
         </WrapperRight>
 
@@ -101,7 +105,7 @@ const HouseBox = styled.div`
 
   border: 1px solid black;
   margin: 10px;
-  padding: 5px;
+  padding: 10px;
 `
 
 const WrapperLeft = styled.div`
@@ -117,16 +121,21 @@ const AdditionalInfo = styled.div`
   border: 1px solid #ccc;
 `
 
-const BtnPrice = styled.button`
+const BtnPrice = styled(Link)`
   display: block;
-  margin-left: auto;
-  margin-top: 5px;
+  width: 70%;
+  margin: auto;
+  margin-top: 10px;
+  text-align: center
+  text-decoration: none;
+  border: 1px solid black;
+  padding 5px;
+  color: black;
+  background: #ddd
 `
 
 const Carusel = styled.div`
-  >div {
-
-  }
+  
 `
 
 const HouseImage = styled.img`
