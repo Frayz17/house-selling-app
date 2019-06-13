@@ -24,7 +24,7 @@ export default function Rating ({ min, max, onChange, value }) {
   )
 }
 
-Rating.prototypes = {
+Rating.propTypes = {
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,

@@ -1,5 +1,6 @@
 import React from 'react'
 import Room from './Room'
+import PropTypes from 'prop-types'
 
 export default function RoomsFilter ({ rooms, handlerRoomsSelection }) {
   return (
@@ -14,4 +15,9 @@ export default function RoomsFilter ({ rooms, handlerRoomsSelection }) {
       ))}
     </fieldset>
   )
+}
+
+RoomsFilter.propTypes = {
+  rooms: PropTypes.array.isRequired,
+  handlerRoomsSelection: PropTypes.func.isRequired
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import Currency from './Currency'
+import PropTypes from 'prop-types'
 
 export default function CurrencyFilter ({ currencies, handlerCurrencySelection }) {
   const { list, selected } = currencies
@@ -17,4 +18,9 @@ export default function CurrencyFilter ({ currencies, handlerCurrencySelection }
       ))}
     </div>
   )
+}
+
+CurrencyFilter.propTypes = {
+  currencies: PropTypes.object.isRequired,
+  handlerCurrencySelection: PropTypes.func.isRequired
 }

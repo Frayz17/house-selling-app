@@ -27,10 +27,10 @@ const LabelBox = styled.label`
   }
 `
 
-Price.prototypes = {
+Price.propTypes = {
   start: PropTypes.number.isRequired,
   end: PropTypes.number.isRequired,
-  handlerSetPriceStart: PropTypes.number.isRequired,
-  handlerSetPriceEnd: PropTypes.number.isRequired,
+  handlerSetPriceStart: PropTypes.func.isRequired,
+  handlerSetPriceEnd: PropTypes.func.isRequired,
   currency: PropTypes.string.isRequired
 }

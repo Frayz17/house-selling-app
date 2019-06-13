@@ -1,10 +1,8 @@
 import React from 'react'
-
 import CurrencyList from './currencies/CurrencyList'
 import RoomsList from './rooms/RoomsList'
 import Price from './price/Price'
 import Rating from './rating/Rating'
-
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -49,7 +47,7 @@ export default function FiltersList ({
   )
 }
 
-FiltersList.prototypes = {
+FiltersList.propTypes = {
   currencies: PropTypes.object.isRequired,
   rooms: PropTypes.array.isRequired,
   price: PropTypes.object.isRequired,

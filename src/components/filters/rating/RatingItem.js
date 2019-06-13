@@ -19,7 +19,7 @@ export default function RatingItem ({ value, checked, colored, onChange }) {
   )
 }
 
-RatingItem.prototypes = {
+RatingItem.propTypes = {
   colored: PropTypes.bool.isRequired,
   checked: PropTypes.bool.isRequired,
   value: PropTypes.number.isRequired,

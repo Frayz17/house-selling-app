@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
-
 import axios from 'axios'
 import House from './House'
-
 import PropTypes from 'prop-types'
 
 export default function HousesList ({
@@ -82,8 +80,8 @@ export default function HousesList ({
   )
 }
 
-HousesList.prototypes = {
-  currency: PropTypes.object.isRequired,
+HousesList.propTypes = {
+  currency: PropTypes.string.isRequired,
   rooms: PropTypes.array.isRequired,
   price: PropTypes.object.isRequired,
   rating: PropTypes.object.isRequired
